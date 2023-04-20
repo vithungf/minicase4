@@ -4,11 +4,6 @@ import productService from "../service/ProductService";
 
 import bcrypt from 'bcrypt';
 
-declare module "express-session" {
-    interface SessionData {
-        User: { [key: string]: any }
-    }
-}
 
 class HomeController {
 
@@ -24,13 +19,11 @@ class HomeController {
     }
     login = async (req: Request, res: Response) => {
         let user = await this.userService.checkUser(req.body.username);
-        console.log(user.role === 'admin')
         if (user) {
             let comparePass = await bcrypt.compare(req.body.password, user.password)
             if (comparePass) {
-                req.session.User = user._id;
+                req.session["User"] = user._id;
                 if (user.role === 'admin') {
-                    console.log(1)
                     res.redirect(301, '/home-logined')
                 } else {
                     res.redirect(301, '/home-customer')
@@ -67,15 +60,14 @@ class HomeController {
     }
     logout = async (req: Request, res: Response) => {
         await req.session.destroy((err) => {
-            console.log('Destroyed')
             res.redirect(301, '/home')
         })
     }
     orderProduct = async (req: Request, res: Response) => {
-        if (req.session.User) {
-            let user = await this.userService.findById(req.session.User);
+        if (req.session["User"]) {
+            let user = await this.userService.findBYId(req.session["User"])
             let product = await productService.findById(req.params.id);
-            let cart = await this.userService.orderProduct(+req.body.quantity, req.params.id, req.session.User);
+            let cart = await this.userService.orderProduct(+req.body.quantity, req.params.id, req.session["User"]);
             res.redirect(301, '/home-customer');
         }
         else {
@@ -83,8 +75,9 @@ class HomeController {
         }
     }
     showFormCart = async (req: Request, res: Response) => {
-        if (req.session.User) {
-            let cart = await userService.findCartByUser(req.session.User);
+        if (req.session["User"]) {
+            let cart = await userService.findCartByUser(req.session["User"]);
+            console.log(cart, 2222);
             let sum = 0;
             let paid = 0;
             for (let i = 0; i < cart.length; i++) {
@@ -94,6 +87,8 @@ class HomeController {
                 }
                 else {
                     paid += cart[i].quantity * product.price;
+                    console.log(paid);
+
                 }
             }
             res.render('users/cart', { cart: cart, sum: sum, paid: paid });
@@ -103,14 +98,24 @@ class HomeController {
         }
     }
     payOrder = async (req: Request, res: Response) => {
-        if (req.session.User) {
-            await userService.changeStatusCart(req.session.User);
+        if (req.session["User"]) {
+            await userService.changeStatusCart(req.session["User"]);
             res.redirect(301, '/users/cart');
         }
         else {
             res.redirect(301, '/users/login');
         }
     }
+    // deleteCart = async (req: Request, res: Response) => {
+    //     if (req.session.User) {
+    //         let cartId = req.params.id;
+    //         await userService.deleteCartById(cartId);
+    //         res.redirect(301, '/users/cart');
+    //     }
+    //     else {
+    //         res.redirect(301, '/users/login');
+    //     }
+    // }
 
 }
 

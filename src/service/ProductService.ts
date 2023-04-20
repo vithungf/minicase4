@@ -28,6 +28,7 @@ class ProductService{
     }
     findById = async (id)=>{
         let product = await Product.findOne({_id: id}).populate('category');
+        console.log(product)
         if (!product){
             return null;
         }

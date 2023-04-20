@@ -1,11 +1,4 @@
 import { Request, Response } from "express";
-declare module "express-session" {
-    interface SessionData {
-        User: {
-            [key: string]: any;
-        };
-    }
-}
 declare class HomeController {
     private userService;
     constructor();

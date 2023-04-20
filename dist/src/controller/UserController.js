@@ -14,13 +14,11 @@ class HomeController {
         };
         this.login = async (req, res) => {
             let user = await this.userService.checkUser(req.body.username);
-            console.log(user.role === 'admin');
             if (user) {
                 let comparePass = await bcrypt_1.default.compare(req.body.password, user.password);
                 if (comparePass) {
-                    req.session.User = user._id;
+                    req.session["User"] = user._id;
                     if (user.role === 'admin') {
-                        console.log(1);
                         res.redirect(301, '/home-logined');
                     }
                     else {
@@ -60,15 +58,14 @@ class HomeController {
         };
         this.logout = async (req, res) => {
             await req.session.destroy((err) => {
-                console.log('Destroyed');
                 res.redirect(301, '/home');
             });
         };
         this.orderProduct = async (req, res) => {
-            if (req.session.User) {
-                let user = await this.userService.findBYId(req.session.User);
+            if (req.session["User"]) {
+                let user = await this.userService.findBYId(req.session["User"]);
                 let product = await ProductService_1.default.findById(req.params.id);
-                let cart = await this.userService.orderProduct(+req.body.quantity, req.params.id, req.session.User);
+                let cart = await this.userService.orderProduct(+req.body.quantity, req.params.id, req.session["User"]);
                 res.redirect(301, '/home-customer');
             }
             else {
@@ -76,8 +73,9 @@ class HomeController {
             }
         };
         this.showFormCart = async (req, res) => {
-            if (req.session.User) {
-                let cart = await UserService_1.default.findCartByUser(req.session.User);
+            if (req.session["User"]) {
+                let cart = await UserService_1.default.findCartByUser(req.session["User"]);
+                console.log(cart, 2222);
                 let sum = 0;
                 let paid = 0;
                 for (let i = 0; i < cart.length; i++) {
@@ -87,6 +85,7 @@ class HomeController {
                     }
                     else {
                         paid += cart[i].quantity * product.price;
+                        console.log(paid);
                     }
                 }
                 res.render('users/cart', { cart: cart, sum: sum, paid: paid });
@@ -96,8 +95,8 @@ class HomeController {
             }
         };
         this.payOrder = async (req, res) => {
-            if (req.session.User) {
-                await UserService_1.default.changeStatusCart(req.session.User);
+            if (req.session["User"]) {
+                await UserService_1.default.changeStatusCart(req.session["User"]);
                 res.redirect(301, '/users/cart');
             }
             else {

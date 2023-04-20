@@ -1,9 +1,10 @@
 import { Schema, model } from 'mongoose';
+import {IUser} from "./user";
 export interface ICart {
     status?: string;
     quantity?: number;
     product ?: string;
-    user ?: string;
+    user ?: IUser;
 }
 
 const CartSchema = new Schema<ICart> ({

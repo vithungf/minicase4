@@ -26,6 +26,7 @@ class ProductService {
         };
         this.findById = async (id) => {
             let product = await product_1.Product.findOne({ _id: id }).populate('category');
+            console.log(product);
             if (!product) {
                 return null;
             }

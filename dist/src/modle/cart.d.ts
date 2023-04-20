@@ -23,11 +23,12 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
 import { Schema } from 'mongoose';
+import { IUser } from "./user";
 export interface ICart {
     status?: string;
     quantity?: number;
     product?: string;
-    user?: string;
+    user?: IUser;
 }
 declare const Cart: import("mongoose").Model<ICart, {}, {}, {}, Schema<ICart, import("mongoose").Model<ICart, any, any, any, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, ICart>>;
 export { Cart };

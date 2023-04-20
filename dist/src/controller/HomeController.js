@@ -18,7 +18,7 @@ class HomeController {
             res.render('products/create', { categories: categories });
         };
         this.showHomeLogined = async (req, res) => {
-            if (req.session.User) {
+            if (req.session["User"]) {
                 let products = await ProductService_1.default.getAll();
                 res.render('homeLogined', { products: products });
             }
@@ -27,7 +27,7 @@ class HomeController {
             }
         };
         this.showHomeCustomer = async (req, res) => {
-            if (req.session.User) {
+            if (req.session["User"]) {
                 let products = await ProductService_1.default.getAll();
                 res.render('homeCustomer', { products: products });
             }
@@ -36,14 +36,13 @@ class HomeController {
             }
         };
         this.showFormCreate = async (req, res) => {
-            console.log(1);
-            console.log(req.session.User);
-            if (req.session.User) {
+            console.log(req.session["User"]);
+            if (req.session["User"]) {
                 let categories = await CategoryService_1.default.getAll();
                 res.render('products/create', { categories: categories });
             }
             else {
-                console.log(req.session.User);
+                console.log(req.session["User"]);
                 res.redirect(301, '/users/login');
             }
         };
@@ -52,7 +51,7 @@ class HomeController {
             res.redirect(301, '/home-logined');
         };
         this.showFormDelete = async (req, res) => {
-            if (req.session.User) {
+            if (req.session["User"]) {
                 let idDelete = req.params.id;
                 res.render('products/delete', { idDelete: idDelete });
             }
@@ -61,7 +60,7 @@ class HomeController {
             }
         };
         this.deleteProduct = async (req, res) => {
-            if (req.session.User) {
+            if (req.session["User"]) {
                 let id = req.params.id;
                 await this.productService.remove(id);
                 res.redirect(301, '/home-logined');
@@ -71,7 +70,7 @@ class HomeController {
             }
         };
         this.showFormUpdate = async (req, res) => {
-            if (req.session.User) {
+            if (req.session["User"]) {
                 let id = req.params.id;
                 let product = await ProductService_1.default.findById(id);
                 let categories = await CategoryService_1.default.getAll();
@@ -82,7 +81,7 @@ class HomeController {
             }
         };
         this.updateProduct = async (req, res) => {
-            if (req.session.User) {
+            if (req.session["User"]) {
                 let id = req.params.id;
                 let updateProduct = req.body;
                 try {
@@ -102,7 +101,7 @@ class HomeController {
             res.render('homeCustomer', { products: products });
         };
         this.showFormDetail = async (req, res) => {
-            if (req.session.User) {
+            if (req.session["User"]) {
                 let product = await ProductService_1.default.findById(req.params.id);
                 res.render('products/detail', { product: product });
             }

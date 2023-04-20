@@ -53,10 +53,7 @@ class UserService {
     }
 
     findCartByUser = async (user) => {
-        let cart = await Cart.find({ user: user }).populate('product').populate('user');
-        if (!cart) {
-            return null;
-        }
+        let cart = await Cart.find({ user: user }).populate('user').populate('product')
         return cart;
     }
 
@@ -88,6 +85,7 @@ class UserService {
             }
         }
     }
+
 }
 
 export default new UserService();
