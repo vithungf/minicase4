@@ -12,7 +12,7 @@
         <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav mr-auto py-0">
-                    <a href="/home-customer" class="nav-item nav-link active">Home</a>
+                    <a href="/home-customer" class="nav-item nav-link active" style="color: coral">Home</a>
                     <a href="/users/cart" class="nav-item nav-link">Cart Detail</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
@@ -23,7 +23,7 @@
                     </div>
                     <a href="" class="nav-item nav-link">Contact</a>
                 </div>
-                 <form class="d-flex" role="search" action="/products/search" method="post">
+                <form class="d-flex" role="search" action="/products/search" method="post">
                     <input class="form-control me-2" name="search" type="search" placeholder="Search by name product" aria-label="Search">
                     <button class="btn btn-secondary" type="submit">Search</button>
                 </form>
@@ -50,10 +50,13 @@
         <div id="header-carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active" style="height: 410px;">
-                    <img class="img-fluid" src="/image/thumb-1920-557949.jpg" alt="Image">
+                    <img class="img-fluid" src="/image/Pink%20Duck.png" alt="Image">
                 </div>
                 <div class="carousel-item" style="height: 410px;">
-                    <img class="img-fluid" src="/image/dlr-img-stoney-1500x800-3.jpg" alt="Image">
+                    <img class="img-fluid" src="/image/1.png" alt="Image">
+                </div>
+                <div class="carousel-item" style="height: 410px;">
+                    <img class="img-fluid" src="/image/2.png" alt="Image">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
@@ -74,6 +77,8 @@
 
 <!-- Categories Start -->
 <div class="container-fluid">
+    <h1 style="text-align: center">List Product</h1>
+    <hr>
     <div class="row px-xl-5">
         <div class="col-lg-4">
             <!-- <form action="" method="post">
@@ -113,8 +118,7 @@
                         <h5 class="font-weight-semi-bold m-0"><%= item.price %> $</h5>
                         <h5 class="font-weight-semi-bold m-0"><%= item.category.name %></h5>
                         <div class="cd-flex flex-column">
-                            <a href="/cart<%= item._id %>"><button type="button" class="btn btn-primary">cart</button></a>
-<!--                            <a href="/cart<%= item._id %>"><button type="button" class="btn btn-primary">cart</button></a>-->
+                            <a href="/products/detail/<%= item._id %>"><button type="button" class="btn btn-primary">Detail</button></a>
                         </div>
                     </div>
                 </div>
@@ -125,11 +129,13 @@
 
 
     <!-- Offer Start -->
+    <hr>
+    <h1 style="text-align: center">Deal For Season</h1>
     <div class="container-fluid offer pt-5">
         <div class="row px-xl-5">
             <div class="col-md-6 pb-4">
                 <div class="position-relative bg-secondary text-center text-md-right text-white mb-2 py-5 px-5">
-                    <img style="height: 200px;width: 300px" src="/image/minicase4.jpg" alt="">
+                    <img src="/image/mix%20phaamr.jpg" style="width: 300px;height: 200px" alt="">
                     <div class="position-relative" style="z-index: 1;">
                         <h5 class="text-uppercase text-primary mb-3" style="margin-top: 10px">20% off the all order</h5>
                         <h1 class="mb-4 font-weight-semi-bold">Spring Collection</h1>
@@ -139,7 +145,7 @@
             </div>
             <div class="col-md-6 pb-4">
                 <div class="position-relative bg-secondary text-center text-md-left text-white mb-2 py-5 px-5">
-                    <img style="width: 300px;height: 200px" src="/image/mix%20phaamr.jpg" alt="">
+                    <img src="/image/minicase4.jpg" alt="" style="width: 300px;height: 200px">
                     <div class="position-relative" style="z-index: 1;">
                         <h5 class="text-uppercase text-primary mb-3" style="margin-top: 10px">20% off the all order</h5>
                         <h1 class="mb-4 font-weight-semi-bold">Winter Collection</h1>
@@ -274,7 +280,6 @@
             </div>
         </div>
     </div>
-</div>
     <!-- Footer End -->
 
 

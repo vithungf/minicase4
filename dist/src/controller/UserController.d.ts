@@ -16,7 +16,7 @@ declare class HomeController {
     logout: (req: Request, res: Response) => Promise<void>;
     orderProduct: (req: Request, res: Response) => Promise<void>;
     showFormCart: (req: Request, res: Response) => Promise<void>;
-    payOder: (req: Request, res: Response) => Promise<void>;
+    payOrder: (req: Request, res: Response) => Promise<void>;
 }
 declare const _default: HomeController;
 export default _default;

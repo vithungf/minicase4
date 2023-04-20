@@ -12,7 +12,7 @@
         <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav mr-auto py-0">
-                    <a href="/home-logined" class="nav-item nav-link active">Home</a>
+                    <a href="/home-logined" class="nav-item nav-link active" style="color: coral">PinkDuck</a>
                     <a href="/products/createProduct" class="nav-item nav-link">Create Product</a>
                     <a href="" class="nav-item nav-link">Contact</a>
                 </div>
@@ -35,10 +35,13 @@
         <div id="header-carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active" style="height: 410px;">
-                    <img class="img-fluid" src="/image/thumb-1920-557949.jpg" alt="Image">
+                    <img class="img-fluid" src="/image/1.png" alt="Image">
                 </div>
                 <div class="carousel-item" style="height: 410px;">
-                    <img class="img-fluid" src="/image/dlr-img-stoney-1500x800-3.jpg" alt="Image">
+                    <img class="img-fluid" src="/image/2.png" alt="Image">
+                </div>
+                <div class="carousel-item" style="height: 410px;">
+                    <img class="img-fluid" src="/image/Pink%20Duck.png" alt="Image">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
@@ -58,8 +61,11 @@
 
 
 <!-- Categories Start -->
-<div class="container-fluid pt-5">
+<div class="container-fluid pt-5" >
     <div class="row px-xl-5 pb-3">
+
+        <h1 style="text-align: center">list Product</h1>
+        <hr>
         <% products.map(item => {%>
             <div class="col-lg-4 col-md-6 pb-1">
                 <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
@@ -99,6 +105,8 @@
 
 
 <!-- Offer Start -->
+<hr>
+<h1 style="text-align: center">deal for season</h1>
 <div class="container-fluid offer pt-5">
     <div class="row px-xl-5">
         <div class="col-md-6 pb-4">

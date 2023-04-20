@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const user_1 = require("../modle/user");
 const cart_1 = require("../modle/cart");
+const product_1 = require("../modle/product");
 class UserService {
     constructor() {
         this.getAll = async () => {
@@ -45,7 +46,7 @@ class UserService {
             }
             else {
                 cartCheck.quantity += quantity;
-                return cart_1.Cart.updateOne({ _id: cartCheck.id }, { quantity: cartCheck.quantity });
+                return cart_1.Cart.updateOne({ _id: cartCheck._id }, { quantity: cartCheck.quantity });
             }
         };
         this.findCartByUser = async (user) => {
@@ -66,9 +67,19 @@ class UserService {
             }
             else {
                 for (let i = 0; i < cart.length; i++) {
-                    await cart_1.Cart.updateOne({ _id: cart[i].id }, { status: 'paid' });
+                    await cart_1.Cart.updateOne({ _id: cart[i]._id }, { status: 'paid' });
                 }
                 return 'success';
+            }
+        };
+        this.totalMoney = async (user) => {
+            let cart = await cart_1.Cart.find({ user: user }).populate('product');
+            let sum = 0;
+            if (cart) {
+                for (let i = 0; i < cart.length; i++) {
+                    let product = await product_1.Product.findById(cart[i].product);
+                    sum += cart[i].quantity * product.price;
+                }
             }
         };
     }

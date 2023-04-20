@@ -73,13 +73,13 @@ class HomeController {
     }
     orderProduct = async (req: Request, res: Response) => {
         if (req.session.User) {
-            let user = await this.userService.findBYId(req.session.User)
-            let product = await productService.findById(req.params.id)
-            let cart = await this.userService.orderProduct(+req.body.quantity, req.params.id, req.session.User)
-            res.redirect(301, '/home-customer')
-
-        } else {
-            res.redirect(301, '/users/login')
+            let user = await this.userService.findById(req.session.User);
+            let product = await productService.findById(req.params.id);
+            let cart = await this.userService.orderProduct(+req.body.quantity, req.params.id, req.session.User);
+            res.redirect(301, '/home-customer');
+        }
+        else {
+            res.redirect(301, '/users/login');
         }
     }
     showFormCart = async (req: Request, res: Response) => {
@@ -88,28 +88,29 @@ class HomeController {
             let sum = 0;
             let paid = 0;
             for (let i = 0; i < cart.length; i++) {
-                let product = await productService.findById(cart[i].product)
+                let product = await productService.findById(cart[i].product);
                 if (cart[i].status === 'buying') {
                     sum += cart[i].quantity * product.price;
-                } else {
-                    paid += product.price * cart[i].quantity
+                }
+                else {
+                    paid += cart[i].quantity * product.price;
                 }
             }
-            res.render('users/cart', {cart: cart,sum: sum,paid: paid});
-
-        }else {
-            res.redirect(301,'/users/login')
+            res.render('users/cart', { cart: cart, sum: sum, paid: paid });
+        }
+        else {
+            res.redirect(301, '/users/login');
         }
     }
-    payOder = async (req:Request, res:Response) => {
+    payOrder = async (req: Request, res: Response) => {
         if (req.session.User) {
-            await userService.changeStatusCart(req.session.User)
-            res.redirect(301,'/users/cart')
-        }else {
-            res.redirect(301,'/users/login')
+            await userService.changeStatusCart(req.session.User);
+            res.redirect(301, '/users/cart');
+        }
+        else {
+            res.redirect(301, '/users/login');
         }
     }
-
 
 }
 

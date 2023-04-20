@@ -86,7 +86,7 @@ class HomeController {
                         sum += cart[i].quantity * product.price;
                     }
                     else {
-                        paid += product.price * cart[i].quantity;
+                        paid += cart[i].quantity * product.price;
                     }
                 }
                 res.render('users/cart', { cart: cart, sum: sum, paid: paid });
@@ -95,7 +95,7 @@ class HomeController {
                 res.redirect(301, '/users/login');
             }
         };
-        this.payOder = async (req, res) => {
+        this.payOrder = async (req, res) => {
             if (req.session.User) {
                 await UserService_1.default.changeStatusCart(req.session.User);
                 res.redirect(301, '/users/cart');

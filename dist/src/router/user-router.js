@@ -14,4 +14,5 @@ exports.userRouter.get('/register', UserController_1.default.showFormRegister);
 exports.userRouter.post('/register', UserController_1.default.register);
 exports.userRouter.get('/cart', UserController_1.default.showFormCart);
 exports.userRouter.post('/order/:id', UserController_1.default.orderProduct);
+exports.userRouter.post('/pay-order', UserController_1.default.payOrder);
 //# sourceMappingURL=user-router.js.map

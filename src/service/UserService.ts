@@ -36,7 +36,7 @@ class UserService {
         return user
     }
     private orderProduct = async (quantity, product, user) => {
-        let cartCheck = await Cart.findOne({status: 'buying', user: user, product: product});
+        let cartCheck = await Cart.findOne({ status: 'buying', user: user, product: product});
         if (!cartCheck) {
             let cart = {
                 status: 'buying',
@@ -45,35 +45,49 @@ class UserService {
                 user: user,
             }
             return await Cart.create(cart);
-        } else {
-
+        }
+        else {
             cartCheck.quantity += quantity;
-            return Cart.updateOne({_id: cartCheck.id}, {quantity: cartCheck.quantity})
-        }
-    }
-    findCartByUser = async (user) => {
-        let cart = await Cart.find({user: user}).populate('product').populate('user');
-        if (!cart) {
-            return null;
-        }
-        return cart
-    }
-    getAllCart = async () => {
-        let cart = await Cart.find().populate('product').populate('user')
-        return cart
-    }
-    changeStatusCart = async (user) => {
-        let cart = await Cart.find({user: user}).populate('product').populate('user')
-        if (!cart) {
-            return null;
-        } else {
-            for (let i = 0; i < cart.length; i++) {
-                await Cart.updateOne({_id: cart[i].id}, {status: 'paid'})
-            }
-            return 'success'
+            return Cart.updateOne({_id: cartCheck._id}, {quantity: cartCheck.quantity});
         }
     }
 
+    findCartByUser = async (user) => {
+        let cart = await Cart.find({ user: user }).populate('product').populate('user');
+        if (!cart) {
+            return null;
+        }
+        return cart;
+    }
+
+    getAllCart = async () => {
+        let cart = await Cart.find().populate('product').populate('user');
+        return cart;
+    }
+
+    changeStatusCart = async (user) => {
+        let cart = await Cart.find({ user: user }).populate('product').populate('user');
+        if (!cart) {
+            return null;
+        }
+        else {
+            for (let i = 0; i < cart.length; i++) {
+                await Cart.updateOne({_id: cart[i]._id}, {status: 'paid'})
+            }
+            return 'success';
+        }
+    }
+
+    totalMoney = async (user) => {
+        let cart = await Cart.find({ user: user }).populate('product');
+        let sum = 0;
+        if (cart) {
+            for (let i = 0; i < cart.length; i++) {
+                let product = await Product.findById(cart[i].product);
+                sum += cart[i].quantity * product.price;
+            }
+        }
+    }
 }
 
 export default new UserService();

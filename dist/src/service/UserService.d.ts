@@ -23,6 +23,7 @@ declare class UserService {
         _id: import("mongoose").Types.ObjectId;
     }, never>, never>, never>[]>;
     changeStatusCart: (user: any) => Promise<string>;
+    totalMoney: (user: any) => Promise<void>;
 }
 declare const _default: UserService;
 export default _default;

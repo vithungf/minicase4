@@ -102,11 +102,12 @@ class HomeController {
         res.render('homeCustomer', {products: products})
     }
     showFormDetail = async (req: Request, res: Response) => {
-        if(req.session.User){
+        if (req.session.User) {
             let product = await productService.findById(req.params.id);
-            res.render('products/detail', {product: product})
-        }else{
-            res.redirect(301,'/users/login')
+            res.render('products/detail', { product: product });
+        }
+        else {
+            res.redirect(301, '/users/login');
         }
     }
 }

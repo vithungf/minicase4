@@ -10,3 +10,4 @@ userRouter.get('/register',userController.showFormRegister)
 userRouter.post('/register',userController.register)
 userRouter.get('/cart',userController.showFormCart)
 userRouter.post('/order/:id',userController.orderProduct)
+userRouter.post('/pay-order', userController.payOrder);
