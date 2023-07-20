@@ -86,7 +86,7 @@ class HomeController {
                     sum += cart[i].quantity * product.price;
                 }
                 else {
-                    paid += cart[i].quantity * product.price;
+                    paid += cart[i].quantity * (product.price);
                     console.log(paid);
 
                 }
@@ -116,6 +116,18 @@ class HomeController {
     //         res.redirect(301, '/users/login');
     //     }
     // }
+
+    priceRange = async (req: Request, res: Response) => {
+        let products = await productService.priceRange(+req.body.start, +req.body.end);
+        console.log(products);
+        res.render('homeCustomer', { products: products });
+    }
+
+    priceRange1 = async (req: Request, res: Response) => {
+        let products = await productService.priceRange1(+req.query.keyword);
+        res.status(200).json(products);
+    }
+
 
 }
 

@@ -46,6 +46,44 @@ class ProductService {
             }
             return products;
         };
+        this.priceRange = async (start, end) => {
+            let products = await product_1.Product.find({ $and: [{ price: { $gte: start } }, { price: { $lte: end } }] }).populate('category');
+            if (!products) {
+                return null;
+            }
+            return products;
+        };
+        this.priceRange1 = async (value) => {
+            let products;
+            switch (value) {
+                case 99:
+                    products = await product_1.Product.find({ $and: [{ price: { $gte: 0 } }, { price: { $lte: value } }] }).populate('category');
+                    if (!products) {
+                        return null;
+                    }
+                    return products;
+                case 499:
+                    products = await product_1.Product.find({ $and: [{ price: { $gte: 100 } }, { price: { $lte: value } }] }).populate('category');
+                    if (!products) {
+                        return null;
+                    }
+                    return products;
+                case 999:
+                    products = await product_1.Product.find({ $and: [{ price: { $gte: 500 } }, { price: { $lte: value } }] }).populate('category');
+                    if (!products) {
+                        return null;
+                    }
+                    return products;
+                case 1999:
+                    products = await product_1.Product.find({ $and: [{ price: { $gte: 1000 } }, { price: { $lte: value } }] }).populate('category');
+                    if (!products) {
+                        return null;
+                    }
+                    return products;
+                default:
+                    return products = await product_1.Product.find().populate('category');
+            }
+        };
     }
 }
 exports.default = new ProductService();

@@ -11,3 +11,6 @@ userRouter.post('/register',userController.register)
 userRouter.get('/cart',userController.showFormCart)
 userRouter.post('/order/:id',userController.orderProduct)
 userRouter.post('/pay-order', userController.payOrder);
+userRouter.get('/price-range', userController.priceRange1);
+
+

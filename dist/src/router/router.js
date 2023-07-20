@@ -9,10 +9,12 @@ const HomeController_1 = __importDefault(require("../controller/HomeController")
 const HomeController_2 = __importDefault(require("../controller/HomeController"));
 const product_router_1 = require("./product-router");
 const user_router_1 = require("./user-router");
+const UserController_1 = __importDefault(require("../controller/UserController"));
 exports.router = (0, express_1.Router)();
 exports.router.get('/home', HomeController_1.default.showHome);
 exports.router.get('/home-logined', HomeController_1.default.showHomeLogined);
 exports.router.get('/home-customer', HomeController_2.default.showHomeCustomer);
+exports.router.post('/home-customer', UserController_1.default.priceRange);
 exports.router.use('/products', product_router_1.productRouter);
 exports.router.use('/users', user_router_1.userRouter);
 //# sourceMappingURL=router.js.map

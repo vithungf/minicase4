@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 
 <head>
     <%- include('./partial/style')%>
@@ -98,14 +98,14 @@
         </div>
         <div class="col-lg-6">
         </div>
-<!--        <div class="col-lg-2">-->
-<!--            <select name="" id="" class="form-select" aria-label="Default select example" onchange="priceRange(this.value)">-->
-<!--                <option value="0">Khoảng giá</option>-->
-<!--                <option value="99">0$ - 99$</option>-->
-<!--                <option value="499">100$ - 499$</option>-->
-<!--                <option value="999">500$ - 999$</option>-->
-<!--                <option value="1999">1000$ - 1999$</option>-->
-<!--            </select>-->
+        <div class="col-lg-2">
+            <select name="" id="" class="form-select" aria-label="Default select example" onchange="priceRange(this.value)">
+                <option value="0">Khoảng giá</option>
+                <option value="99">0$ - 99$</option>
+                <option value="499">100$ - 499$</option>
+                <option value="999">500$ - 999$</option>
+                <option value="1999">1000$ - 1999$</option>
+            </select>
         </div>
         <div class="row px-xl-5 pb-3 pt-3" id="list-product">
             <% products.map(item => {%>
@@ -345,12 +345,12 @@
                 document.getElementById('list-product').innerHTML = html;
             })
         }
-
         const click = () => {
             console.log('clicked');
         }
     </script>
 </body>
+
 
 <%- include('./partial/js')%>
 </html>

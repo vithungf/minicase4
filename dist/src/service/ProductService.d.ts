@@ -14,6 +14,10 @@ declare class ProductService {
     search: (name: any) => Promise<Omit<import("mongoose").Document<unknown, any, import("../modle/product").IProduct> & Omit<import("../modle/product").IProduct & {
         _id: import("mongoose").Types.ObjectId;
     }, never>, never>[]>;
+    priceRange: (start: any, end: any) => Promise<Omit<import("mongoose").Document<unknown, any, import("../modle/product").IProduct> & Omit<import("../modle/product").IProduct & {
+        _id: import("mongoose").Types.ObjectId;
+    }, never>, never>[]>;
+    priceRange1: (value: any) => Promise<any>;
 }
 declare const _default: ProductService;
 export default _default;
